@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="./css/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Songti SC Bold" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body>
+      <h1 class="tc title">Create your sonic environment</h1>
+      <div class="indexbox container clearfix" id="container">
+          <div class="leftwrap fl">
+              <ul class="leftbox1 clearfix bd1 bd2">
+                <li>
+                    <img src="./images/rain.png" alt="rain"/>
+                    <!-- <input type="range" name="points" /> -->
+                </li>
+                <li>
+                    <img src="./images/wind.png" alt="wind"/>
+                </li>
+                <li>
+                    <img src="./images/thunder.png" alt="thunder"/>
+                </li>
+                <li>
+                    <img src="./images/sea.png" alt="sea"/>
+                </li>
+              </ul>
+              <ul class="leftbox1 clearfix ">
+                <li>
+                    <img src="./images/airplane.png" alt="airplane"/>
+                </li>
+                <li>
+                    <img src="./images/boat.png" alt="boat"/>
+                </li>
+                <li>
+                    <img src="./images/train.png" alt="train"/>
+                </li>
+                <li>
+                    <img src="./images/car.png" alt="car"/>
+                </li>
+              </ul>    
+          </div>
+          <div class="fl rightwrap">
+              <ul class="leftbox1 clearfix ">
+                <li>
+                    <img src="./images/honeybee.png" alt="honeybee"/>
+                </li>
+                <li>
+                    <img src="./images/cicada.png" alt="cicada"/>
+                </li>
+                <li>
+                    <img src="./images/dog.png" alt="dog"/>
+                </li>
+                <li>
+                    <img src="./images/bird.png" alt="bird"/>
+                </li>
+              </ul>
+              <ul class="leftbox1 clearfix bd3 bd4">
+                <li>
+                    <img src="./images/piano.png" alt="piano"/>
+                </li>
+                <li>
+                    <img src="./images/guzhen.png" alt="guzhen"/>
+                </li>
+                <li>
+                    <img src="./images/guitar.png" alt="guitar"/>
+                </li>
+                <li>
+                    <img src="./images/violoncello.png" alt="violoncello"/>
+                </li>
+              </ul>
+          </div>
+
+          <div class="fang">
+            
+          </div>
+      </div>
+      <canvas id="Mycanvas"></canvas>
+
+      <script type="text/javascript" src="js/soundmanager2.js"></script>
+      <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="js/app.js"></script>
+
+      <script type="text/javascript">
+
+        var imgs = $('#container').find('img');
+        imgs.click(function() {
+          var that = $(this);
+          //imgs.removeClass('active');
+          $(this).toggleClass('active');
+          that.parent().toggleClass('active');
+          var name = that.attr('alt');
+          if(that.hasClass('active')) {
+            
+            var url = 'sounds/' + name + '.mp3';
+            //that.attr('src', './images/1'+ name +'.png');
+            var audio = that.parent().find('audio');
+            if(!audio.length) {
+              that.parent().append('<audio src="'+url+'" autoplay loop></audio><br/>');
+              that.parent().append('<input class="range" type="range" name="points" />');
+            } else {
+              audio[0].play();
+            }
+            
+          } else {
+            //that.attr('src', './images/'+ name +'.png');
+            var audio = that.parent().find('audio');
+            audio[0].pause();
+          }
+         
+
+
+        });
+
+        // change
+        $('body').on('change', '.range', function() {
+          var that = $(this);
+          var val = this.value;
+          console.log(val);
+          var audio = that.parent().find('audio');
+          audio[0].volume = val/100;
+        })
+
+	   
+	  </script>
+    <script type="text/javascript">
+      
+    </script>
+</body>
+</html>
